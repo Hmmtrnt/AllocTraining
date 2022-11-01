@@ -97,6 +97,7 @@ SceneBase* SceneTest::update()
 		for (auto& pEnemy : m_pEnemy)
 		{
 #if true
+			// nullptr‚ğ’T‚µ‚ÄV‚µ‚¢’e‚ğ¶¬‚·‚é
 			if (pEnemy)	continue;
 
 			pEnemy = new ObjectEnemy;
@@ -141,4 +142,15 @@ void SceneTest::draw()
 			pEnemy->draw();
 		}
 	}
+
+	int num = 0;
+	for (auto& pEnemy : m_pEnemy)
+	{
+		if ((pEnemy) && (pEnemy->isExist()))
+		{
+			num++;
+		}
+	}
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "“G‚Ì”:%d", num);
+
 }
