@@ -100,11 +100,13 @@ SceneBase* SceneTest::update()
 			// nullptr‚ð’T‚µ‚ÄV‚µ‚¢’e‚ð¶¬‚·‚é
 			if (pEnemy)	continue;
 
-			pEnemy = new ObjectEnemy;
+			pEnemy = new ObjectEnemyThrow;
 			pEnemy->init();
 			pEnemy->setHandle(m_hEnemy);
 			pEnemy->setExist(true);
-			Vec2 pos{ Game::kScreenWidth + 16, static_cast<float>(GetRand(Game::kScreenHeight)) };
+		//	pEnemy->setDir(GetRand(359));
+		//	Vec2 pos{ Game::kScreenWidth + 16, static_cast<float>(GetRand(Game::kScreenHeight)) };
+			Vec2 pos{ Game::kScreenWidth / 2, Game::kScreenHeight / 2 };
 			pEnemy->setPos(pos);
 			break;
 #else
