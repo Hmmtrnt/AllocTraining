@@ -31,6 +31,16 @@ void ObjectEnemyArrow::update()
 	}
 }
 
+void ObjectEnemyArrow::draw()
+{
+	if (!m_isExist)	return;
+	int width = 0;
+	int height = 0;
+	GetGraphSize(m_hGraph, &width, &height);
+	//DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_hGraph, true);
+	DrawRotaGraph(static_cast<int>(m_pos.x) + width / 2, static_cast<int>(m_pos.y) + height / 2, 2.0f, , m_hGraph, true, false);
+}
+
 void ObjectEnemyArrow::setDir(float degree)
 {
 	float rad = degree * DX_PI_F / 180.0f;
