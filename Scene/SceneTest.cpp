@@ -1,6 +1,8 @@
 #include "DxLib.h"
 #include "game.h"
 #include "SceneTest.h"
+#include "ObjectEnemyDir.h"
+#include "ObjectEnemyThrow.h"
 
 namespace
 {
@@ -11,7 +13,7 @@ namespace
 	constexpr int kEnemyMax = 32;
 
 	// 敵の生成間隔(フレーム数)
-	constexpr int kEnemyInterval = 30;
+	constexpr int kEnemyInterval = 15;
 }
 
 SceneTest::SceneTest():
@@ -70,24 +72,12 @@ SceneBase* SceneTest::update()
 			continue;
 		}
 		pEnemy->update();
-#if true
+
 		if (!pEnemy->isExist())
 		{
 			delete pEnemy;
 			pEnemy = nullptr;
 		}
-#else
-		// ↓自己流
-		// メモリの解放
-		if (!pEnemy->isExist())
-		{
-			if (pEnemy)
-			{
-				delete pEnemy;
-				pEnemy = nullptr;
-			}
-		}
-#endif
 	}
 
 	m_enemyInterval++;
@@ -96,38 +86,37 @@ SceneBase* SceneTest::update()
 		// 使用されていない敵を探してそれを使う
 		for (auto& pEnemy : m_pEnemy)
 		{
-#if true
 			// nullptrを探して新しい弾を生成する
 			if (pEnemy)	continue;
 
-			pEnemy = new ObjectEnemyThrow;
+			switch (GetRand(2))
+			{
+			case 0:
+				pEnemy = new ObjectEnemy;
+				break;
+			case 1:
+				pEnemy = new ObjectEnemyDir;
+				break;
+			case 2:
+			default:
+				pEnemy = new ObjectEnemyThrow;
+				break;
+			}
+
 			pEnemy->init();
 			pEnemy->setHandle(m_hEnemy);
 			pEnemy->setExist(true);
-		//	pEnemy->setDir(GetRand(359));
+
+			// データに応じた初期化を行う
+			ObjectEnemyDir* pTemp = dynamic_cast<ObjectEnemyDir*>(pEnemy);
+			if (pTemp)
+			{
+				pTemp->setDir(GetRand(359));
+			}
 		//	Vec2 pos{ Game::kScreenWidth + 16, static_cast<float>(GetRand(Game::kScreenHeight)) };
 			Vec2 pos{ Game::kScreenWidth / 2, Game::kScreenHeight / 2 };
 			pEnemy->setPos(pos);
 			break;
-#else
-			// ↓自己流
-			// メモリの確保
-			if (!pEnemy)
-			{
-				pEnemy = new ObjectEnemy;
-			}
-
-			if (pEnemy->isExist())	continue;
-
-			pEnemy->init();
-			pEnemy->setHandle(m_hEnemy);
-
-			pEnemy->setExist(true);
-
-			Vec2 pos{Game::kScreenWidth+16, static_cast<float>(GetRand(Game::kScreenHeight))};
-			pEnemy->setPos(m_pos);
-			break;
-#endif
 		}
 		m_enemyInterval = 0;
 	}
