@@ -7,8 +7,6 @@ namespace
 {
 	// ‘¬“x
 	constexpr float kSpeed = 8.0f;
-	// ‰ñ“]‘¬“x
-	constexpr float kRotateSpeed = 1.0f;
 }
 
 ObjectEnemy::ObjectEnemy() :
