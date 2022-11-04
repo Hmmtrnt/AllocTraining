@@ -19,8 +19,10 @@ public:
 	virtual void draw() override;
 
 private:
+	// グラフィックハンドル
 	int			m_hPlayer;
 	int			m_hEnemy;
+	int			m_hArrow;
 
 	ObjectPlayer*	m_pPlayer;
 	std::vector<ObjectEnemy*>	m_pEnemy;

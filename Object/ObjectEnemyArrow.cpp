@@ -1,4 +1,4 @@
-#include "ObjectEnemyDir.h"
+#include "ObjectEnemyArrow.h"
 #include "game.h"
 #include "DxLib.h"
 #include <math.h>
@@ -8,18 +8,18 @@ namespace
 	constexpr float kSpeed = 5.0f;
 }
 
-ObjectEnemyDir::ObjectEnemyDir() :
+ObjectEnemyArrow::ObjectEnemyArrow() :
 	m_vec()
 {
 
 }
 
-ObjectEnemyDir::~ObjectEnemyDir()
+ObjectEnemyArrow::~ObjectEnemyArrow()
 {
 
 }
 
-void ObjectEnemyDir::update()
+void ObjectEnemyArrow::update()
 {
 	if (!m_isExist)	return;
 	m_rotation += m_rotateSpeed;
@@ -31,7 +31,7 @@ void ObjectEnemyDir::update()
 	}
 }
 
-void ObjectEnemyDir::setDir(float degree)
+void ObjectEnemyArrow::setDir(float degree)
 {
 	float rad = degree * DX_PI_F / 180.0f;
 

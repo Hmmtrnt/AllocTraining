@@ -3,11 +3,13 @@
 #include "SceneTest.h"
 #include "ObjectEnemyDir.h"
 #include "ObjectEnemyThrow.h"
+#include "ObjectEnemyArrow.h"
 
 namespace
 {
 	const char* const kPlayerFilename = "Data/player.bmp";
 	const char* const kEnemyFilename = "Data/enemy.bmp";
+	const char* const kArrowFilename = "Data/arrow.png";
 
 	// “¯Žž‚É“oê‚·‚é“G‚ÌÅ‘å”
 	constexpr int kEnemyMax = 32;
@@ -43,6 +45,7 @@ void SceneTest::init()
 {
 	m_hPlayer = LoadGraph(kPlayerFilename);
 	m_hEnemy = LoadGraph(kEnemyFilename);
+	m_hArrow = LoadGraph(kArrowFilename);
 
 	m_pPlayer->init();
 	m_pPlayer->setHandle(m_hPlayer);
@@ -60,6 +63,7 @@ void SceneTest::end()
 {
 	DeleteGraph(m_hPlayer);
 	DeleteGraph(m_hEnemy);
+	DeleteGraph(m_hArrow);
 }
 
 SceneBase* SceneTest::update()
@@ -88,7 +92,7 @@ SceneBase* SceneTest::update()
 		{
 			// nullptr‚ð’T‚µ‚ÄV‚µ‚¢’e‚ð¶¬‚·‚é
 			if (pEnemy)	continue;
-
+#if false
 			switch (GetRand(2))
 			{
 			case 0:
@@ -102,6 +106,9 @@ SceneBase* SceneTest::update()
 				pEnemy = new ObjectEnemyThrow;
 				break;
 			}
+#else
+			pEnemy = new ObjectEnemyArrow;
+#endif
 
 			pEnemy->init();
 			pEnemy->setHandle(m_hEnemy);
@@ -113,6 +120,14 @@ SceneBase* SceneTest::update()
 			{
 				pTemp->setDir(GetRand(359));
 			}
+			ObjectEnemyArrow* pTempArrow = dynamic_cast<ObjectEnemyArrow*>(pEnemy);
+			if (pTempArrow)
+			{
+				pTempArrow->setHandle(m_hArrow);
+				pTempArrow->setDir(static_cast<float>(GetRand(359)));
+			}
+
+
 		//	Vec2 pos{ Game::kScreenWidth + 16, static_cast<float>(GetRand(Game::kScreenHeight)) };
 			Vec2 pos{ Game::kScreenWidth / 2, Game::kScreenHeight / 2 };
 			pEnemy->setPos(pos);

@@ -4,11 +4,11 @@
 #include "Vec2.h"
 
 // Žw’è‚µ‚½•ûŒü‚É”ò‚ñ‚Å‚¢‚­“G
-class ObjectEnemyDir : public ObjectEnemy
+class ObjectEnemyArrow : public ObjectEnemy
 {
 public:
-	ObjectEnemyDir();
-	virtual ~ObjectEnemyDir();
+	ObjectEnemyArrow();
+	virtual ~ObjectEnemyArrow();
 
 	virtual void update();
 
