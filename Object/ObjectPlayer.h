@@ -18,6 +18,8 @@ public:
 
 	void setHandle(int handle) { m_hGraph = handle; }
 
+	Vec2 getPos() const { return m_pos; }
+
 protected:
 	// グラフィックハンドル
 	int		m_hGraph;

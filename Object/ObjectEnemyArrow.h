@@ -16,10 +16,15 @@ public:
 	// 飛んでいく方向を指定する(左方向を0度として時計回りの角度を指定する)
 	void setDir(float degree);
 
-private:
-	// 飛んでいく方向の傾き
-	float m_angle;
+	// 飛んでいく位置を指定する
+	void setTaget(Vec2 target) { m_target = target; }
 
+private:
 	// 飛んでいく方向
+	double m_rad;
+
 	Vec2 m_vec;
+
+	// ターゲット位置
+	Vec2 m_target;
 };

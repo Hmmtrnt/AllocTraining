@@ -22,7 +22,7 @@ SceneTest::SceneTest():
 	m_hPlayer(-1),
 	m_hEnemy(-1),
 	m_pPlayer(nullptr),
-	m_pEnemy(kEnemyInterval, nullptr),
+	m_pEnemy(kEnemyMax, nullptr),
 	m_enemyInterval(0)
 {
 	m_pPlayer = new ObjectPlayer;
@@ -71,12 +71,15 @@ SceneBase* SceneTest::update()
 	m_pPlayer->update();
 	for (auto& pEnemy : m_pEnemy)
 	{
-		if (!pEnemy)
+		if (!pEnemy) continue;
+		// “G‚Ìí—Ş‚É‰‚µ‚Ä•K—v‚È‘Oˆ—
+		ObjectEnemyArrow* pArrow = dynamic_cast<ObjectEnemyArrow*>(pEnemy);
+		if (pArrow)
 		{
-			continue;
+			pArrow->setTaget(m_pPlayer->getPos());
 		}
-		pEnemy->update();
 
+		pEnemy->update();
 		if (!pEnemy->isExist())
 		{
 			delete pEnemy;
@@ -109,7 +112,6 @@ SceneBase* SceneTest::update()
 #else
 			pEnemy = new ObjectEnemyArrow;
 #endif
-
 			pEnemy->init();
 			pEnemy->setHandle(m_hEnemy);
 			pEnemy->setExist(true);
@@ -118,7 +120,7 @@ SceneBase* SceneTest::update()
 			ObjectEnemyDir* pTemp = dynamic_cast<ObjectEnemyDir*>(pEnemy);
 			if (pTemp)
 			{
-				pTemp->setDir(GetRand(359));
+				pTemp->setDir(static_cast<float>(GetRand(359)));
 			}
 			ObjectEnemyArrow* pTempArrow = dynamic_cast<ObjectEnemyArrow*>(pEnemy);
 			if (pTempArrow)
