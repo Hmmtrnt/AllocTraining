@@ -27,9 +27,6 @@ public:
 protected:
 	// グラフィックハンドル
 	int		m_hGraph;
-	// 画像のサイズ
-	int		m_sGraphX;
-	int		m_sGraphY;
 
 	// 回転角度
 	float	rotation;
