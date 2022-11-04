@@ -29,9 +29,9 @@ protected:
 	int		m_hGraph;
 
 	// ‰ñ“]Šp“x
-	float	rotation;
+	float	m_rotation;
 	// ‰ñ“]‘¬“x
-	float	rotateSpeed;
+	float	m_rotateSpeed;
 
 	// ‘¶İ‚·‚é‚©
 	bool	m_isExist;
