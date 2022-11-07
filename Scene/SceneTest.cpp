@@ -21,6 +21,7 @@ namespace
 SceneTest::SceneTest():
 	m_hPlayer(-1),
 	m_hEnemy(-1),
+	m_hArrow(-1),
 	m_pPlayer(nullptr),
 	m_pEnemy(kEnemyMax, nullptr),
 	m_enemyInterval(0)
