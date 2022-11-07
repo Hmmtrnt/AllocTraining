@@ -29,6 +29,7 @@ void ObjectEnemyArrow::update()
 	dir = dir.normalize();
 	dir *= kSpeed;
 
+	// is•ûŒü‚ÉŒü‚­
 	m_rad = atan2(dir.y, dir.x);
 
 	m_vec = dir;
